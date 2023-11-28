@@ -77,8 +77,88 @@ int main()
 					cin >> c;
 					students[i].setGroup(c);
 				}
+				break;
+				case '4':
+				{
+					string strVal1, strVal2, strVal3;
+					int intVal1, intVal2, intVal3;
+					char buf;
+					cout << "Введите номер предмета от 1 до 3: ";
+					cin >> buf;
+					students[i].getEducation(strVal1, intVal1, strVal2,
+						intVal2, strVal3, intVal3);
+					if (buf == '1')
+					{
+						cout << "Введите новый предмет: ";
+						cin >> strVal1;
+						cout << "Введите новую оценку: ";
+						cin >> intVal1;
+					}
+					else if (buf == '2')
+					{
+						cout << "Введите новый предмет: ";
+						cin >> strVal2;
+						cout << "Введите новую оценку: ";
+						cin >> intVal2;
+					}
+					else if (buf == '3')
+					{
+						cout << "Введите новый предмет: ";
+						cin >> strVal3;
+						cout << "Введите новую оценку: ";
+						cin >> intVal3;
+					}
+					else
+						throw exception("Неверный номер предмета");
+					students[i].setEducation(strVal1, intVal1, strVal2,
+						intVal2, strVal3, intVal3);
+				}
+				break;
+				default:
+					throw exception("Неверный пункт меню");
+				}
+				SwVal = '3';
+			}
+			else if (SwVal == '4')
+			{
+				int i;
+				cout << "Введите номер элемента: ";
+				cin >> i;
+				i--;
+				if (i < 0 || i >= id)
+					throw exception("Неверный номер");
+				for (int j = i; j < id; j++)
+					students[j] = students[j + 1];
+				id--;
+			}
+			else if (SwVal == '5')
+			{
+				scantext();
+			}
+			else if (SwVal == '6')
+			{
+				exc();
+			}
+			else if (SwVal == '7')
+			{
+				break;
+			}
+			else
+			{
+				throw exception("Неверный пункт меню");
 			}
 		}
+		catch (const exception& exp)
+		{
+			cout << "Исключение: " << exp.what() << endl;
+		}
+		system("pause");
+		system("cls");
 	}
+	exc();
+	delete[]students;
+	// Задание 2
+	system("pause");
+	system("cls");
 
 		
