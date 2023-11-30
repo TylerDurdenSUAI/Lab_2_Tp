@@ -160,5 +160,75 @@ int main()
 	// Задание 2
 	system("pause");
 	system("cls");
+}
+	void scantext()
+	{
+		try
+		{
+			string word;
+			cout << "Enter your word - ";
+			cin >> word;
+			ifstream inp("data.txt");
+			while (inp.peek() != EOF)
+			{
+				string per_word;
+				for (string line; getline(inp, line);)
+				{
+					if (line.find(word) == string::npos)
+					{
+						break;
+					}
+					else
+					{
+						cout << line << endl;
+					}
+				}
 
-		
+			}
+		}
+		catch (const char* ex) { cout << "Error: " << ex << endl; }
+		cout << endl;
+	}
+	void sort() {
+		string strVal1, strVal2, strVal3;
+		int intVal1, intVal2, intVal3;
+		float sr1, sr2;
+		Student bufStudent;
+		for (int i = 0; i < id - 1; i++)
+		{
+			for (int j = 0; j < id - i - 1; j++)
+			{
+				students[j].getEducation(strVal1, intVal1, strVal2, intVal2, strVal3,
+					intVal3);
+				sr1 = (float)(intVal1 + intVal2 + intVal3) / 3;
+				students[j + 1].getEducation(strVal1, intVal1, strVal2, intVal2,
+					strVal3, intVal3);
+				sr2 = (float)(intVal1 + intVal2 + intVal3) / 3;
+				if (sr1 > sr2)
+				{
+					bufStudent = students[j];
+					students[j] = students[j + 1];
+					students[j + 1] = bufStudent;
+				}
+			}
+		}
+	}
+	void exc() {
+		string strVal1, strVal2, strVal3;
+		int intVal1, intVal2, intVal3;
+		int cnt = 0;
+		cout << "Студенты, имеющие оценку 4 и 5: " << endl;
+		for (int i = 0; i < id; i++)
+		{
+			students[i].getEducation(strVal1, intVal1, strVal2, intVal2, strVal3,
+				intVal3);
+			if ((intVal1 == 4 && intVal2 == 5) || (intVal1 == 5 && intVal2 == 4) || (intVal2 == 4 && intVal3 == 5) || (intVal2 == 5 && intVal3 == 4) || (intVal1 == 4 && intVal3 == 5) || (intVal1 == 5 && intVal3 == 4))
+			{
+				cout << "\t" << cnt + 1 << ": " << students[i].getStudName() << ", "
+					<< students[i].getGroup() << endl;
+				cnt++;
+			}
+		}
+		if (cnt == 0)
+			cout << "\tТаких студентов нет" << endl;
+	}
